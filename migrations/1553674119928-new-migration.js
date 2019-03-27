@@ -19,16 +19,25 @@ module.exports.up = next => {
         .find({})
         .toArray()
         .then(res => res.map(item => {
+          item.authorFisrtName = item.author.split(' ')[0];
+          item.authorLastName = item.author.split(' ')[1];
           db.collection('products').updateOne({ "_id": item._id }, {
-            $set: { updatedPrice: item.price * 3 },
-            $unset: { la: "",
-                      lastFielddsfd: "",
-                      lass: "",
-                      lasse: "",
-                      lastField: "",
-                      dfs32: "",
-                      dfs: "",
-                      newField: "" },
+            $set: { 
+              updatedPrice: item.price *1.05,
+              authorFisrtName: item.authorFisrtName,
+              authorLastName: item.authorLastName
+            },
+            $unset: {
+              la: "",
+              lastFielddsfd: "",
+              lass: "",
+              lasse: "",
+              lastField: "",
+              dfs32: "",
+              dfs: "",
+              newField: "",
+              author: ""
+            }
           });
         }
         ));
